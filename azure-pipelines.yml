@@ -19,5 +19,5 @@ steps:
     - script: npm run lint
       displayName: 'check style convention adherence'
 
-    - script: nom run test
+    - script: npm run test
       displayName: 'run automated tests'
