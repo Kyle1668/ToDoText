@@ -1,0 +1,23 @@
+trigger:
+    - '*'
+
+pool:
+    vmImage: 'ubuntu-latest'
+
+steps:
+    - task: NodeTool@0
+      inputs:
+          versionSpec: '10.x'
+      displayName: 'Install Node.js'
+
+    - script: npm install
+      displayName: 'install dependencies'
+
+    - script: npm run compile
+      displayName: 'typescript compilation to ES5'
+
+    - script: npm run lint
+      displayName: 'check style convention adherence'
+
+    - script: nom run test
+      displayName: 'run automated tests'
