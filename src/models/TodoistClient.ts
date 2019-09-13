@@ -1,54 +1,17 @@
 import axios, { AxiosResponse } from 'axios';
-
-class TodoistProject {
-    public id: string;
-    public name: string;
-    public order: number;
-    public commentCount: number;
-
-    constructor(id: string, name: string, order: number, commentCount: number) {
-        this.id = id;
-        this.name = name;
-        this.order = order;
-        this.commentCount = commentCount;
-    }
-}
-
-class TodoistTask {
-    public id: string;
-    public projectID: string;
-    public order: number;
-    public content: string;
-    public completed: boolean;
-    public priority: number;
-    public dueDate: string;
-    public url: string;
-
-    constructor(id, projectID, order, content, completed, priority, dueDate, url) {
-        this.id = id;
-        this.projectID = projectID;
-        this.order = order;
-        this.content = content;
-        this.completed = completed;
-        this.priority = priority;
-        this.dueDate = dueDate;
-        this.url = url;
-    }
-
-    public getTextSummary(): string {
-        return `Task: ${this.content} by ${this.dueDate}`;
-    }
-}
+import TodoistProject from './TodoistProject';
+import TodoistTask from './TodoistTask';
 
 export default class TodoistClient {
     private apiToken: string;
+    private baseEndpointUrl = 'https://api.todoist.com/rest/v1/';
 
     constructor(token: string) {
         this.apiToken = token;
     }
 
     public async getProjects(): Promise<Array<TodoistProject>> {
-        const projectEndpointUrl = 'https://api.todoist.com/rest/v1/projects';
+        const projectEndpointUrl = this.baseEndpointUrl + 'projects';
         const axiosRequestConfig = {
             headers: {
                 Authorization: `Bearer ${this.apiToken}`,
@@ -57,8 +20,13 @@ export default class TodoistClient {
 
         try {
             const result: AxiosResponse = await axios.get(projectEndpointUrl, axiosRequestConfig);
-            const responseData = result.data.map(element => {
-                return new TodoistProject(element.id, element.name, element.order, element.number);
+            const responseData = result.data.map(rawProjectData => {
+                return new TodoistProject(
+                    rawProjectData.id,
+                    rawProjectData.name,
+                    rawProjectData.order,
+                    rawProjectData.number,
+                );
             });
             return responseData;
         } catch (error) {
@@ -66,5 +34,31 @@ export default class TodoistClient {
         }
     }
 
-    public async getTasks();
+    public async getTasks(): Promise<Array<TodoistTask>> {
+        const tasksEndpointUrl = this.baseEndpointUrl + 'tasks?filter=(overdue%20%7C%20today)';
+        const axiosRequestConfig = {
+            headers: {
+                Authorization: `Bearer ${this.apiToken}`,
+            },
+        };
+
+        try {
+            const result: AxiosResponse = await axios.get(tasksEndpointUrl, axiosRequestConfig);
+            const responseData = result.data.map(rawTaskData => {
+                return new TodoistTask(
+                    rawTaskData.id,
+                    rawTaskData.project_id,
+                    rawTaskData.order,
+                    rawTaskData.content,
+                    rawTaskData.completed,
+                    rawTaskData.priority,
+                    rawTaskData.due,
+                    rawTaskData.url,
+                );
+            });
+            return responseData;
+        } catch (error) {
+            throw `Unable to connect to the Todoist API: ${error}`;
+        }
+    }
 }
