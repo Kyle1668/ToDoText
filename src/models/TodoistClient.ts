@@ -6,11 +6,37 @@ class TodoistProject {
     public order: number;
     public commentCount: number;
 
-    constructor(inID: string, inName: string, inOrder: number, inCommentCount: number) {
-        this.id = inID;
-        this.name = inName;
-        this.order = inOrder;
-        this.commentCount = inCommentCount;
+    constructor(id: string, name: string, order: number, commentCount: number) {
+        this.id = id;
+        this.name = name;
+        this.order = order;
+        this.commentCount = commentCount;
+    }
+}
+
+class TodoistTask {
+    public id: string;
+    public projectID: string;
+    public order: number;
+    public content: string;
+    public completed: boolean;
+    public priority: number;
+    public dueDate: string;
+    public url: string;
+
+    constructor(id, projectID, order, content, completed, priority, dueDate, url) {
+        this.id = id;
+        this.projectID = projectID;
+        this.order = order;
+        this.content = content;
+        this.completed = completed;
+        this.priority = priority;
+        this.dueDate = dueDate;
+        this.url = url;
+    }
+
+    public getTextSummary(): string {
+        return `Task: ${this.content} by ${this.dueDate}`;
     }
 }
 
@@ -39,4 +65,6 @@ export default class TodoistClient {
             throw `Unable to connect to the Todoist API: ${error}`;
         }
     }
+
+    public async getTasks();
 }
