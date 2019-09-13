@@ -21,12 +21,7 @@ export default class TodoistClient {
         try {
             const result: AxiosResponse = await axios.get(projectEndpointUrl, axiosRequestConfig);
             const responseData = result.data.map(rawProjectData => {
-                return new TodoistProject(
-                    rawProjectData.id,
-                    rawProjectData.name,
-                    rawProjectData.order,
-                    rawProjectData.number,
-                );
+                return new TodoistProject(rawProjectData.id, rawProjectData.name, rawProjectData.order, rawProjectData.number);
             });
             return responseData;
         } catch (error) {
@@ -52,7 +47,7 @@ export default class TodoistClient {
                     rawTaskData.content,
                     rawTaskData.completed,
                     rawTaskData.priority,
-                    rawTaskData.due,
+                    rawTaskData.due.string,
                     rawTaskData.url,
                 );
             });

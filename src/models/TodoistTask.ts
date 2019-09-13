@@ -8,14 +8,14 @@ export default class TodoistTask {
     public dueDate: string;
     public url: string;
 
-    constructor(id, projectID, order, content, completed, priority, dueDate, url) {
+    constructor(id: string, projectID: string, order: number, content: string, completed: boolean, priority: number, dueDate: string, url: string) {
         this.id = id;
         this.projectID = projectID;
         this.order = order;
         this.content = content;
         this.completed = completed;
         this.priority = priority;
-        this.dueDate = dueDate.string;
+        this.dueDate = dueDate;
         this.url = url;
     }
 

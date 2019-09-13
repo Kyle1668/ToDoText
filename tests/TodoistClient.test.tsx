@@ -36,9 +36,6 @@ describe('Integration Tests for Todoist Client', () => {
     test('desearilizing tasks response', () => {
         return validTodoistClient.getTasks().then(response => {
             expect(response).toBeDefined();
-
-            console.error(response);
-
             if (response.length > 0) {
                 expect(response[0].id).toBeDefined();
                 expect(response[0].projectID).toBeDefined();
