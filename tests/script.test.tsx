@@ -1,5 +1,7 @@
+require('dotenv').config();
+
 describe('tests for main script', () => {
-    it('placeholder test', () => {
+    test('placeholder test', () => {
         expect(1 + 1).toEqual(2);
     });
 });
