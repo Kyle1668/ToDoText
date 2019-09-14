@@ -1,4 +1,4 @@
-import TodoistClient from '../src/models/TodoistClient';
+import TodoistApiClient from '../src/models/TodoistApiClient';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -12,11 +12,11 @@ describe('Unit Tests for Todoist Client', () => {
 
 describe('Integration Tests for Todoist Client', () => {
     const todoistApiToken = String(process.env.TODOIST_TOKEN);
-    const validTodoistClient = new TodoistClient(todoistApiToken);
-    const invalidTodoistClient = new TodoistClient(todoistApiToken);
+    const validTodoistApiClient = new TodoistApiClient(todoistApiToken);
+    const invalidTodoistApiClient = new TodoistApiClient(todoistApiToken);
 
     test('desearilizing projects response', () => {
-        return validTodoistClient.getProjects().then(response => {
+        return validTodoistApiClient.getProjects().then(response => {
             expect(response).toBeDefined();
 
             if (response.length > 0) {
@@ -27,14 +27,14 @@ describe('Integration Tests for Todoist Client', () => {
     });
 
     test('handle bad api key in projects', () => {
-        return invalidTodoistClient.getProjects().catch(error => {
+        return invalidTodoistApiClient.getProjects().catch(error => {
             expect(error).toBeDefined();
             expect(error).toEqual('Unable to connect to the Todoist API: Error: Request failed with status code 403');
         });
     });
 
     test('desearilizing tasks response', () => {
-        return validTodoistClient.getTasks().then(response => {
+        return validTodoistApiClient.getTasks().then(response => {
             expect(response).toBeDefined();
             if (response.length > 0) {
                 expect(response[0].id).toBeDefined();
@@ -50,7 +50,7 @@ describe('Integration Tests for Todoist Client', () => {
     });
 
     test('handle bad api key in tasks', () => {
-        return invalidTodoistClient.getTasks().catch(error => {
+        return invalidTodoistApiClient.getTasks().catch(error => {
             expect(error).toBeDefined();
             expect(error).toEqual('Unable to connect to the Todoist API: Error: Request failed with status code 403');
         });

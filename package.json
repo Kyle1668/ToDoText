@@ -1,49 +1,51 @@
 {
-  "name": "to-do-text",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "node src/dist/server.js",
-    "compile": ".\\node_modules\\.bin\\tsc",
-    "clean": "rm .\\src\\dist\\*",
-    "lint": ".\\node_modules\\.bin\\tsc --noEmit && .\\node_modules\\.bin\\eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
-    "test": ".\\node_modules\\.bin\\jest ."
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
-    ],
-    "transform": {
-      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    "name": "to-do-text",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "node src/dist/server.js",
+        "compile": ".\\node_modules\\.bin\\tsc",
+        "clean": "rm .\\src\\dist\\*",
+        "lint": ".\\node_modules\\.bin\\eslint '*/**/*.{ts,tsx}'",
+        "test": ".\\node_modules\\.bin\\jest ."
     },
-    "roots": [
-      "tests"
-    ]
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "axios": "^0.19.0",
-    "dotenv": "^8.1.0",
-    "express": "^4.17.1",
-    "nodemon": "^1.19.2",
-    "typescript": "^3.6.3"
-  },
-  "devDependencies": {
-    "@types/dotenv": "^6.1.1",
-    "@types/express": "^4.17.1",
-    "@types/jest": "^24.0.18",
-    "@types/node": "^12.7.5",
-    "@typescript-eslint/eslint-plugin": "^2.2.0",
-    "@typescript-eslint/parser": "^2.2.0",
-    "eslint": "^6.3.0",
-    "eslint-config-prettier": "^6.3.0",
-    "eslint-plugin-prettier": "^3.1.0",
-    "prettier": "^1.18.2",
-    "ts-jest": "^24.1.0"
-  }
+    "jest": {
+        "moduleFileExtensions": [
+            "ts",
+            "tsx",
+            "js"
+        ],
+        "transform": {
+            "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+        },
+        "roots": [
+            "tests"
+        ]
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@types/twilio": "0.0.10",
+        "axios": "^0.19.0",
+        "dotenv": "^8.1.0",
+        "express": "^4.17.1",
+        "nodemon": "^1.19.2",
+        "twilio": "^3.34.0",
+        "typescript": "^3.6.3"
+    },
+    "devDependencies": {
+        "@types/dotenv": "^6.1.1",
+        "@types/express": "^4.17.1",
+        "@types/jest": "^24.0.18",
+        "@types/node": "^12.7.5",
+        "@typescript-eslint/eslint-plugin": "^2.2.0",
+        "@typescript-eslint/parser": "^2.2.0",
+        "eslint": "^6.3.0",
+        "eslint-config-prettier": "^6.3.0",
+        "eslint-plugin-prettier": "^3.1.0",
+        "prettier": "^1.18.2",
+        "ts-jest": "^24.1.0"
+    }
 }

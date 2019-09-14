@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import TodoistProject from './TodoistProject';
 import TodoistTask from './TodoistTask';
 
-export default class TodoistClient {
+export default class TodoistApiClient {
     private apiToken: string;
     private baseEndpointUrl = 'https://api.todoist.com/rest/v1/';
 
