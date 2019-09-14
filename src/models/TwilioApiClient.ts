@@ -15,7 +15,7 @@ export default class TwilioApiClient {
         this.client = TwilioLibraryClient(this.accountSid, this.authToken);
     }
 
-    public sendSmsMessage(messageContent: string): Promise<boolean> {
+    public async sendSmsMessage(messageContent: string): Promise<boolean> {
         return this.client.messages
             .create({
                 body: messageContent,
@@ -30,5 +30,9 @@ export default class TwilioApiClient {
                 console.error(JSON.stringify(error));
                 return false;
             });
+    }
+
+    public generateSmsMessageBodyFromTasks(): string {
+        return 'test';
     }
 }

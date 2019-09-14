@@ -1,6 +1,7 @@
 import TodoistApiClient from '../src/models/TodoistApiClient';
 import dotenv from 'dotenv';
-dotenv.config();
+
+if (process.env.ENV === 'dev') dotenv.config();
 
 describe('Unit Tests for Todoist Client', () => {
     const todoistApiToken = String(process.env.TODOIST_TOKEN);
@@ -13,7 +14,7 @@ describe('Unit Tests for Todoist Client', () => {
 describe('Integration Tests for Todoist Client', () => {
     const todoistApiToken = String(process.env.TODOIST_TOKEN);
     const validTodoistApiClient = new TodoistApiClient(todoistApiToken);
-    const invalidTodoistApiClient = new TodoistApiClient(todoistApiToken);
+    const invalidTodoistApiClient = new TodoistApiClient('123');
 
     test('desearilizing projects response', () => {
         return validTodoistApiClient.getProjects().then(response => {

@@ -7,7 +7,7 @@
         "start": "node src/dist/server.js",
         "compile": ".\\node_modules\\.bin\\tsc",
         "clean": "rm .\\src\\dist\\*",
-        "lint": ".\\node_modules\\.bin\\eslint '*/**/*.{ts,tsx}'",
+        "lint": ".\\node_modules\\.bin\\eslint '*/**/*.ts'",
         "test": ".\\node_modules\\.bin\\jest ."
     },
     "jest": {
