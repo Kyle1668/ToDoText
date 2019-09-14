@@ -1,4 +1,5 @@
 import TwilioLibraryClient from 'twilio';
+import TodoistTask from './TodoistTask';
 
 export default class TwilioApiClient {
     private accountSid: string;
@@ -32,7 +33,18 @@ export default class TwilioApiClient {
             });
     }
 
-    public generateSmsMessageBodyFromTasks(): string {
-        return 'test';
+    public generateSmsMessageBodyFromTasks(todaysTasks: Array<TodoistTask>): string {
+        let response = `
+TODAY'S TASKS
+-------------
+        `;
+
+        todaysTasks.forEach(task => {
+            response += '\n' + task.getTextSummary();
+        });
+
+        response += '\n\n';
+
+        return response;
     }
 }
