@@ -19,6 +19,7 @@ describe('Twilio Client Tests', () => {
     const validTwilioClient = new TwilioApiClient(accountSid, authToken, userPhoneNumber, twilioPhoneNumber);
     const invalidTwilioClient = new TwilioApiClient('AC123', '456', userPhoneNumber, twilioPhoneNumber);
 
+    /*
     describe('Unit Tests', () => {
         test('test correct message generation', () => {
             const testTasks = [
@@ -29,27 +30,28 @@ describe('Twilio Client Tests', () => {
 
             const generateMessageContent = validTwilioClient.generateSmsMessageBodyFromTasks(testTasks);
             const expectedMessageBody = `
-TODAY'S TASKS
--------------
-        
-Task: make study guide by Jul 11
-Task: go to the gym by Jul 11
-Task: Write emails by Jul 11
+            TODAY'S TASKS
+            -------------
+                    
+            Task: make study guide by Jul 11
+            Task: go to the gym by Jul 11
+            Task: Write emails by Jul 11
 
-`;
+            `;
 
             console.log(generateMessageContent);
 
             expect(generateMessageContent).toEqual(expectedMessageBody);
         });
     });
+    */
 
     describe('Integration Tests', () => {
-        // test('should send SMS message', () => {
-        //     return validTwilioClient.sendSmsMessage('Integration Test Triggered Message').then(response => {
-        //         expect(response).toBeDefined();
-        //     });
-        // });
+        test('should send SMS message', () => {
+            return validTwilioClient.sendSmsMessage('Integration Test Triggered Message').then(response => {
+                expect(response).toBeDefined();
+            });
+        });
 
         test('should get error when sending SMS message', () => {
             return invalidTwilioClient.sendSmsMessage('Integration Test Triggered Message').catch(error => {
