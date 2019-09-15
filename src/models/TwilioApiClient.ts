@@ -24,11 +24,11 @@ export default class TwilioApiClient {
                 to: this.userSmsNumber,
             })
             .then(message => {
-                console.log(JSON.stringify(message));
+                console.log(JSON.stringify(message, null, 2));
                 return true;
             })
             .catch(error => {
-                console.error(JSON.stringify(error));
+                console.error(JSON.stringify(error, null, 2));
                 return false;
             });
     }
@@ -40,7 +40,7 @@ TODAY'S TASKS
         `;
 
         todaysTasks.forEach(task => {
-            response += '\n' + task.getTextSummary();
+            response += '\n\n' + task.getTextSummary();
         });
 
         response += '\n\n';
